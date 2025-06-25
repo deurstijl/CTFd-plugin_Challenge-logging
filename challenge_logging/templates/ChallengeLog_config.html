@@ -1,0 +1,34 @@
+{% extends "admin/base.html" %}
+{% block content %}
+<div class="bg-light p-4 mb-4 rounded">
+    <div class="container">
+        <h1 class="text-center">Challenge Log Setup</h1>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+      <div class="col-md-7 offset-md-4">
+        This implements logging when a challenge is opened.<br>
+        Can be used to check for cheaters that get hints with 1 account and solve challenges with the other.<br><br>
+        <form method="POST">
+        <label><input type="checkbox" name="enabled" {% if ChallengeLog.enabled %}checked{% endif %}> Enable logging when opening a challenge.</label><br>
+        <br>
+        <input type="submit" value="Save Settings">
+        </form>
+      </div>
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="mt-3 text-center">
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">{{ message }}</div>
+            {% endfor %}
+            </div>
+        {% endif %}
+      {% endwith %}
+    </div>
+</div>
+
+{% endblock %}
+
+
