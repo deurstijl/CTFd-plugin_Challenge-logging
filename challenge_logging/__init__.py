@@ -75,12 +75,13 @@ def inject_into_routes(app):
             if ChallengeLog["enabled"]:
                 ChallengeNum=request.path.replace("/api/v1/challenges/","")
                 user=get_current_user()
-                log(
-                    "challenge_open",
-                    format="[{date}] {ip} - {name} opened challenge {challenge}",
-                    name=user.name,
-                    challenge=ChallengeNum
-                )
+                if user:
+                    log(
+                        "challenge_open",
+                        format="[{date}] {ip} - {name} opened challenge {challenge}",
+                        name=user.name,
+                        challenge=ChallengeNum
+                    )
         return
 
 def load(app):
